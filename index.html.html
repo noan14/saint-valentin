@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Saint-Valentin 💖</title>
+<style>
+    body {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 40px;
+        overflow: hidden;
+    }
+
+    h1 {
+        color: #fff;
+        font-size: 2.2em;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .buttons {
+        margin-top: 30px;
+    }
+
+    button {
+        font-size: 22px;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    #yes {
+        background: #ff4d6d;
+        color: white;
+    }
+
+    #no {
+        background: #fff;
+        color: #ff4d6d;
+        margin-left: 20px;
+    }
+
+    #result {
+        margin-top: 30px;
+        display: none;
+    }
+
+    #result img {
+        max-width: 300px;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .heart {
+        position: absolute;
+        font-size: 22px;
+        animation: float 4s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-800px); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<h1>Tu veux être ma Valentine ? 💘</h1>
+
+<div class="buttons">
+    <button id="yes">Oui 💖</button>
+    <button id="no">Non 😭</button>
+</div>
+
+<div id="result">
+    <h1>Merci mon amour 💕</h1>
+    <img src="mwah.gif" alt="mwah">
+</div>
+
+<script>
+let yesBtn = document.getElementById("yes");
+let noBtn = document.getElementById("no");
+let yesSize = 1;
+let noSize = 1;
+
+noBtn.addEventListener("click", () => {
+    yesSize += 0.25;
+    noSize -= 0.2;
+
+    yesBtn.style.transform = `scale(${yesSize})`;
+    noBtn.style.transform = `scale(${Math.max(noSize, 0.25)})`;
+});
+
+yesBtn.addEventListener("click", () => {
+    document.querySelector(".buttons").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    createHearts();
+});
+
+function createHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = Math.random() > 0.5 ? "💖" : "💕";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "-30px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+    }, 180);
+}
+</script>
+
+</body>
+</html>
